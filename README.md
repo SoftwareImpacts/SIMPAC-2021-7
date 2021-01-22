@@ -51,7 +51,7 @@ SOURCE_DIR$ python parser.py --predict --model <path-to-model_NAME> --params <pa
 `--outdir`: Path to directory where output file will be saved.<br/>
 `--output`: Name of the output file.<br/>
 
-## Update the model with new modern texts
+## Update the model with new texts
 
 If you wish to attempt improving OldSlavNet v2.0 with new early Slavic or (harmonized) modern Russian/Serbian texts, perform:
 
