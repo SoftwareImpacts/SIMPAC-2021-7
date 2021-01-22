@@ -12,23 +12,24 @@ If you use our pretrained model to parse new pre-modern Slavic texts, please cit
    2) Pedrazzini, Nilo. 2020. Exploiting Cross-Dialectal Gold Syntax for Low-Resource Historical Languages: Towards a Generic Parser for Pre-Modern Slavic. In Folgert Karsdorp, Barbara McGillivray, Adina Nerghes & Melvin Wevers (eds.), *Proceedings of the Workshop on Computational Humanities Research*, November 18–20, 2020, Amsterdam, The Netherlands (CEUR Workshop Proceedings, Vol. 2723), 237-247. http://ceur-ws.org/Vol-2723/short48.pdf. 
 
 ## Training Data and parsing performance
-The parser was trained on data from the Tromsø Old Russian and Old Church Slavonic Treebank (TOROT) (https://torottreebank.github.io), 20200116 release. Modern Russian data was harmonized with Old East Slavic and Old Church Slavonic spelling and morphology. The harmonization scripts can be found in our [Figshare repository](link to be provided). 
+The parser was trained on data from the Tromsø Old Russian and Old Church Slavonic Treebank (TOROT) (https://torottreebank.github.io), 20200116 release, with the exception of modern Serbian data which is from [UD_Serbian-SET](https://github.com/UniversalDependencies/UD_Serbian-SET). Modern Russian and Serbian data was harmonized with Old East Slavic/Old Church Slavonic spelling and morphology, with the harmonization scripts provided ([this](https://github.com/npedrazzini/OldSlavNet/blob/master/Harmonization%20Scripts/normalise_ru_chu.rb) is for Russian, [this](https://github.com/npedrazzini/OldSlavNet/blob/master/Harmonization%20Scripts/normalise_sr_chu.rb) is for Serbian)
 
-Best results on test sets (described in details in paper [3]) are as follows (first three rows show the performance of the previous version of OldSlavNet:
+Model performance on test sets (described in more detail in paper [2]) are as follows:
 
-| Model name    | Test set        | UAS   | LAS   |
-| ------------- |:-------------:  | -----:| -----:|
-| OldSlavNet v2.0     | TBD  | TBD | TBD |
-| jPTDP-GEN     | Codex Marianus  | 83.79 | 78.42 |
-| jPTDP-ESL     | PVL             | 85.70 | 80.16 |
-| jPTDP-SSL     | Codex Marianus  | 83.61 | 77.98 |
+| Model name          | Test set            | UAS   | LAS   |
+| -------------       |:-------------:      | -----:| -----:|
+| OldSlavNet v2.0     | Codex Marianus      | **84.12** | **78.92** |  
+|                     |                     | 83.79 | 78.42 |
+| OldSlavNet v2.0     | PVL.                | 85.33 | 79.66 | 
+|                     |                     | **85.70** | **80.16** |
+| OldSlavNet v2.0     | Vita Constantini    | **70.72** | **56.64** | 
+|                     |                     | 69.23 | 56.41 |
+| OldSlavNet v2.0     | Codex Suprasliensis | **74.23** | **66.51** | 
+|                     |                     | 72.28 | 63.38 |
+| OldSlavNet v2.0     | Sergej Radonezh     | **74.10** | **66.11** |
+|                     |                     | 73.90 | 65.76 |
 
-## Repository breakdown
-All texts (with >400 tokens) were split into train:dev:test with a 80:10:10 proportion. The folders *train*, *dev*, *test* in this repository contain these files unmerged, should one wish to experiment with different training sets by trying different combinations of data.
-
-In the model folder (i.e. *OldSlavNet*) you can find all the relevant scripts to run the parsers on new files, as well as the training, dev and test sets used to train and evaluate the model, which is only included for the sake of transparency (i.e. you will not need them to simply use the model off-the-shelf). 
-
-The parameters and hyperparameters files for each pretrained model (*model_NAME* and *model_NAME.params* respectively) can be found in our [Figshare repository](link to be provided).
+Note that the results from OldSlavNet v2.0 are from one single model, while previous results are from three different models (two variety-specific and a generic one), indicative of the greater flexibility of OldSlavNet v2.0. 
 
 ## Use the pretrained model to tag new pre-modern Slavic texts
 OldSlavNet requires the following packages:
@@ -36,7 +37,9 @@ OldSlavNet requires the following packages:
 - [`Dynet 2.0`](https://dynet.readthedocs.io/en/latest/python.html)
 - You can install your requirements, including Dynet, with: `pip install -r requirements.txt`
 
-Once you have downloaded the model folder ([OldSlavNet](link)), as well as the parameters and hyperparameters files from the [Figshare repo](link to be provided), run the following to annotate new texts:
+The parameters and hyperparameters of the pretrained model (*model_NAME* and *model_NAME.params*), as well as the training, development and test sets can be downloaded from the latest [release](https://github.com/npedrazzini/OldSlavNet/releases).
+
+Run the following to annotate new texts using OldSlavNet v2.0:
 
  ```r 
 SOURCE_DIR$ python parser.py --predict --model <path-to-model_NAME> --params <path-to-model_LABEL.params> --test <path-to-input-conllu-file> --outdir <path-to-output-directory> --output <output-name.conllu>
@@ -49,4 +52,30 @@ SOURCE_DIR$ python parser.py --predict --model <path-to-model_NAME> --params <pa
 `--output`: Specify name of the output file.<br/>
 
 ## Update the model with new modern texts
-TODO
+
+If you wish to attempt improving OldSlavNet v2.0 with new early Slavic or (harmonized) modern Russian/Serbian texts, perform (hyper-parameters in [] are optional):
+
+    SOURCE_DIR$ python parser.py --dynet-seed 123456789 [--dynet-mem <int>] [--epochs <int>] [--lstmdims <int>] [--lstmlayers <int>] [--hidden <int>] [--wembedding <int>] [--cembedding <int>] [--pembedding <int>] [--prevectors <path-to-pre-trained-word-embedding-file>] [--model <String>] [--params <String>] --outdir <path-to-output-directory> --train <path-to-train-file>  --dev <path-to-dev-file>
+
+
+ * `--dynet-mem`: DyNet memory in MB.
+ * `--epochs`: Training epochs. Default: 30.
+ * `--lstmdims`: BiLSTM dimensions. Default: 256.
+ * `--lstmlayers`: BiLSTM layers. Default: 2.
+ * `--hidden`: MLP hidden layer size. Default: 200.
+ * `--wembedding`: Size of word embeddings. Default: 100.
+ * `--cembedding`: Size of character embeddings. Default: 50.
+ * `--pembedding`: Size of POS tag embeddings. Default: 100.
+ * `--prevectors`: Path to the pre-trained word embedding file for initialization. Default: None (WE are randomly initialized).
+ * `--model`: Model parameters file. Default: model.
+ * `--params`: Model hyper-parameters file. Default: model.params.
+ * `--outdir`: Path to directory where the new trained model will be saved. 
+ * `--train`: Path to training data.
+ * `--dev`: Path to development data. 
+
+
+**Simple example:**
+
+    SOURCE_DIR$ python parser.py --dynet-seed 123456789 --dynet-mem 1000 --epochs 30 --lstmdims 128 --lstmlayers 2 --hidden 300 --wembedding 100 --cembedding 50 --pembedding 100 --model model --params model.params --outdir /Users/nilo/Slavic/Models --train /Models/train.conllu --dev /Models/dev.conllu
+    
+This will produce (or update) the files `model` and `model.params` in folder `SOURCE_DIR/Models`. 
