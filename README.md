@@ -77,6 +77,6 @@ Hyper-parameters in [] are optional:
 
 **Simple example**:
 
- ` SOURCE_DIR$ python parser.py --dynet-seed 123456789 --dynet-mem 1000 --epochs 30 --lstmdims 128 --lstmlayers 2 --hidden 300 --wembedding 100 --cembedding 50 --pembedding 100 --model model --params model.params --outdir /Users/nilo/Slavic/Models --train /Models/train.conllu --dev /Models/dev.conllu
-`    
+    SOURCE_DIR$ python parser.py --dynet-seed 123456789 --dynet-mem 1000 --epochs 30 --lstmdims 128 --lstmlayers 2 --hidden 300 --wembedding 100 --cembedding 50 --pembedding 100 --model model --params model.params --outdir /Users/nilo/Slavic/Models --train /Models/train.conllu --dev /Models/dev.conllu 
+        
 This will produce (or update) the files `model` and `model.params` in folder `SOURCE_DIR/Models`. 
