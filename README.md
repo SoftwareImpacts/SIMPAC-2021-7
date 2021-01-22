@@ -55,9 +55,8 @@ SOURCE_DIR$ python parser.py --predict --model <path-to-model_NAME> --params <pa
 
 If you wish to attempt improving OldSlavNet v2.0 with new early Slavic or (harmonized) modern Russian/Serbian texts, perform:
 
-
-   ` SOURCE_DIR$ python parser.py --dynet-seed 123456789 [--dynet-mem <int>] [--epochs <int>] [--lstmdims <int>] [--lstmlayers <int>] [--hidden <int>] [--wembedding <int>] [--cembedding <int>] [--pembedding <int>] [--prevectors <path-to-pre-trained-word-embedding-file>] [--model <String>] [--params <String>] --outdir <path-to-output-directory> --train <path-to-train-file>  --dev <path-to-dev-file>`
-
+    SOURCE_DIR$ python parser.py --dynet-seed 123456789 [--dynet-mem <int>] [--epochs <int>] [--lstmdims <int>] [--lstmlayers <int>] [--hidden <int>] [--wembedding <int>] [--cembedding <int>] [--pembedding <int>] [--prevectors <path-to-pre-trained-word-embedding-file>] [--model <String>] [--params <String>] --outdir <path-to-output-directory> --train <path-to-train-file>  --dev <path-to-dev-file>
+    
 Hyper-parameters in [] are optional:
 
  * `--dynet-mem`: DyNet memory in MB.
