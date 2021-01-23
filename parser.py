@@ -21,7 +21,7 @@ if __name__ == '__main__':
     parser.add_argument("--pembedding", type=int, dest="pembedding_dims", default=100)
     parser.add_argument("--epochs", type=int, dest="epochs", default=30)
     parser.add_argument("--hidden", type=int, dest="hidden_units", default=100)
-    parser.add_argument("--lr", type=float, dest="learning_rate", default=0.1) #changed from None to 0.1 and uncommented (NP)
+  #  parser.add_argument("--lr", type=float, dest="learning_rate", default=0.1) #Uncomment if model is used to train new parser or update OldSlavNet
     parser.add_argument("--outdir", type=str, dest="output", default="results")
     parser.add_argument("--activation", type=str, dest="activation", default="tanh")
     parser.add_argument("--lstmlayers", type=int, dest="lstm_layers", default=2)
@@ -31,7 +31,7 @@ if __name__ == '__main__':
     parser.add_argument("--predict", action="store_true", dest="predictFlag", default=False)
     parser.add_argument("--bibi-lstm", action="store_false", dest="bibiFlag", default=True)
     parser.add_argument("--disablecostaug", action="store_false", dest="costaugFlag", default=True)
-    parser.add_argument("--dynet-seed", type=int, dest="seed", default=0) #changed from 0 to 7 (NP)
+    parser.add_argument("--dynet-seed", type=int, dest="seed", default=0) 
     parser.add_argument("--dynet-mem", type=int, dest="mem", default=0)
 
     args = parser.parse_args()
