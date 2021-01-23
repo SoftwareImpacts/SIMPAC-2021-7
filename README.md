@@ -26,7 +26,7 @@ Model performance on test sets (described in more detail in paper [2]) are as fo
 | jPTDP-GEN       |                     | 69.23 | 56.41 |
 | OldSlavNet v2.0     | Codex Suprasliensis | **74.23** | **66.51** | 
 | jPTDP-GEN     |                     | 72.28 | 63.38 |
-| OldSlavNet v2.0     | Sergej Radonezh     | **74.10** | **66.11** |
+| OldSlavNet v2.0     | Sergij of Radonezh     | **74.10** | **66.11** |
 |  jPTDP-GEN     |                     | 73.90 | 65.76 |
 
 Note that the results from OldSlavNet v2.0 are from one single model, while previous results are from three different models (two variety-specific and a generic one), indicative of the greater flexibility of OldSlavNet v2.0. 
