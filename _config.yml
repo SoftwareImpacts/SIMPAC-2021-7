@@ -1,13 +1,5 @@
 theme: minimal-mistakes-jekyll
-minimal_mistakes_skin: "dirt"
-title: "OldSlavNet"
-subtitle: "Version 2.0"
-description: "Early Slavic PoS and Dependency Parser"
-url: "https://npedrazzini.github.io/OldSlavNet/"
-repository: "npedrazzini/OldSlavNet"
-teaser: /assets/images/logo.png
-logo: "/assets/images/logo.png"
-breadcrumbs: true
-search: true
-twitter:
-  username: "samovar_samovar"
+logo: /images/logo.png
+show_downloads: "true"
+title: OldSlavNet
+description: Early Slavic PoS and Dependency Parser
