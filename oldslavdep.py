@@ -18,9 +18,9 @@ class OldSlavDep:
         self.model = ParameterCollection()
         random.seed(1)
         self.trainer = RMSPropTrainer(self.model)
-        if options.learning_rate is not None: # uncommented (NP)
-            self.trainer = RMSPropTrainer(self.model, options.learning_rate) #uncommented (NP)
-            print("RMSPropTrainer initial learning rate:", options.learning_rate) #uncommented (NP)
+        #if options.learning_rate is not None: #Uncomment if model is used to train new parser or update OldSlavNet
+           # self.trainer = RMSPropTrainer(self.model, options.learning_rate) 
+            #print("RMSPropTrainer initial learning rate:", options.learning_rate) 
 
         self.activations = {'tanh': tanh,
                             'sigmoid': logistic,
